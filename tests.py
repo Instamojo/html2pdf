@@ -4,7 +4,7 @@ import unittest
 
 
 class TestApp(unittest.TestCase):
-    url = 'http://127.0.0.1:12345/'
+    url = 'http://localhost:12345/'
 
     def test_json_request(self):
         data = {
