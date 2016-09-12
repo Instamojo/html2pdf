@@ -8,7 +8,7 @@ machine:
 
 test:
   override:
-    - python tests.py 127.0.0.1:12345
+    - python tests.py
 
 deployment:
   publish:
