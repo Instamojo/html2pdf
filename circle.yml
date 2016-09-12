@@ -1,3 +1,7 @@
+dependencies:
+  override:
+    - pip install requests
+
 machine:
   services:
     - docker
