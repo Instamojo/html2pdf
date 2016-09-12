@@ -1,19 +1,13 @@
-dependencies:
-  override:
-    - pip install requests
-
 machine:
   services:
     - docker
 
+dependencies:
+  override:
+    - pip install requests
+    - docker build -t html2pdf:latest .
+    - docker run -it -p 12345:80 html2pdf
+
 test:
   override:
     - python tests.py
-
-deployment:
-  publish:
-    branch: /.*/
-    commands:
-      - docker build -t html2pdf:latest .
-      - docker run -it -p 12345:80 html2pdf
-      - ./publish.sh
