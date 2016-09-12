@@ -1,0 +1,15 @@
+machine:
+  services:
+    - docker
+
+test:
+  override:
+    - python tests.py 127.0.0.1:12345
+
+deployment:
+  publish:
+    branch: /.*/
+    commands:
+      - docker build -t html2pdf:latest .
+      - docker run -it -p 12345:80 html2pdf
+      - ./publish.sh
