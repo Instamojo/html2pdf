@@ -20,7 +20,9 @@ def application(request):
     """
     start = time.time()
     if request.method != 'POST':
-        return
+        return Response(
+            status=405
+        )
     request_is_json = False
     if request.content_type == 'application/json':
         request_is_json = True
@@ -78,5 +80,5 @@ def application(request):
 if __name__ == '__main__':
     from werkzeug.serving import run_simple
     run_simple(
-        '127.0.0.1', 6000, application, use_debugger=True, use_reloader=True
+        '127.0.0.1', 8080, application
     )

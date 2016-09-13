@@ -8,7 +8,7 @@ class TestApp(unittest.TestCase):
 
     def test_json_request(self):
         data = {
-            'contents': open('sample.html').read().encode('base64'),
+            'contents': open('testcases/sample.html').read().encode('base64'),
         }
         headers = {
             'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 500)
 
     def test_file_input(self):
-        files = {'file': open('sample.html', 'rb')}
+        files = {'file': open('testcases/sample.html', 'rb')}
         response = requests.post(url=self.url, files=files)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.headers['content-type'], 'application/pdf')
@@ -51,7 +51,7 @@ class TestApp(unittest.TestCase):
 
     def test_blank_file_input(self):
         # blank pdf will be the output
-        files = {'file': open('blank.html', 'rb')}
+        files = {'file': open('testcases/blank.html', 'rb')}
         response = requests.post(url=self.url, files=files)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.headers['content-type'], 'application/pdf')
