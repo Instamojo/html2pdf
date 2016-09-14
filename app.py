@@ -2,6 +2,7 @@ import json
 import tempfile
 import logging
 import time
+import os
 
 from werkzeug.wsgi import wrap_file
 from werkzeug.wrappers import Request, Response
@@ -71,11 +72,14 @@ def application(request):
         execute(' '.join(args))
         end = time.time()
         print "time taken {elapse}".format(elapse=(end-start))
-        return Response(
-            wrap_file(request.environ, open(file_name + '.pdf')),
+
+        result = file_name + '.pdf'
+        response = Response(
+            wrap_file(request.environ, open(result)),
             mimetype='application/pdf',
         )
-
+        os.remove(result)
+        return response
 
 if __name__ == '__main__':
     from werkzeug.serving import run_simple
