@@ -17,4 +17,5 @@ deployment:
   publish:
     branch: /.*/
     commands:
+      - docker build -t html2pdf:latest .
       - ./publish.sh
