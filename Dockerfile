@@ -6,8 +6,10 @@ RUN apt-get upgrade -y
 
 # Download and install wkhtmltopdf
 RUN apt-get install -y build-essential xorg libssl-dev libxrender-dev wget gdebi && apt-get install -y python-pip
-RUN wget http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
-RUN gdebi --n wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
+RUN wget http://download.gna.org/wkhtmltopdf/0.12/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
+RUN tar -xJf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
+RUN cp wkhtmltox/bin/wkhtmltopdf /usr/local/bin/wkhtmltopdf
+RUN cp wkhtmltox/bin/wkhtmltoimage /usr/local/bin/wkhtmltoimage
 RUN pip install werkzeug executor gunicorn
 
 ADD app.py /app.py
