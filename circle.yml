@@ -12,3 +12,10 @@ dependencies:
 test:
   override:
     - python tests.py
+
+deployment:
+  publish:
+    branch: /.*/
+    commands:
+      - chmod +x publish.sh
+      - ./publish.sh
