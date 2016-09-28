@@ -6,6 +6,8 @@ RUN apt-get upgrade -y
 
 # Download and install wkhtmltopdf
 RUN apt-get install -y build-essential xorg libssl-dev libxrender-dev wget gdebi && apt-get install -y python-pip
+RUN apt-get update -y && apt-get install -y fonts-roboto
+RUN fc-cache -fv
 RUN wget http://download.gna.org/wkhtmltopdf/0.12/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
 RUN tar -xJf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
 RUN cp wkhtmltox/bin/wkhtmltopdf /usr/local/bin/wkhtmltopdf
