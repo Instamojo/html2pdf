@@ -20,7 +20,7 @@ RUN apt-get install -y wget && \
 
 # Install font packages to install commonly used fonts. Accept Eula for Microsoft Fonts automatically.
 RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections && \
-    apt-get install -y ttf-mscorefonts-installer fonts-roboto
+    apt-get install -y ttf-mscorefonts-installer fonts-roboto fonts-noto
 
 # Application dependencies
 RUN apt-get install -y python-pip && pip install werkzeug executor gunicorn

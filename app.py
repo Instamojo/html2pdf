@@ -1,3 +1,4 @@
+import codecs
 import json
 import tempfile
 import logging
@@ -34,7 +35,7 @@ def application(request):
             # If a JSON payload is there, all data is in the payload
             payload = json.loads(request.data)
             try:
-                source_file.write(payload['contents'].decode('base64'))
+                source_file.write(payload['contents'].encode('utf-8'))
             except KeyError:
                 logger.warn('The request content is not specified')
                 return Response(
