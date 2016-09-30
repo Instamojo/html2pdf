@@ -8,7 +8,7 @@ class TestApp(unittest.TestCase):
 
     def test_json_request(self):
         data = {
-            'contents': open('testcases/sample.html').read().encode('base64'),
+            'contents': open('testcases/sample.html').read().encode('utf-8'),
         }
         headers = {
             'Content-Type': 'application/json',
@@ -34,7 +34,8 @@ class TestApp(unittest.TestCase):
             'Content-Type': 'application/json',
         }
         response = requests.post(url=self.url, data=json.dumps(data), headers=headers)
-        self.assertEqual(response.status_code, 500)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.headers['content-type'], 'application/pdf')
 
     def test_file_input(self):
         files = {'file': open('testcases/sample.html', 'rb')}
@@ -56,6 +57,26 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.headers['content-type'], 'application/pdf')
 
+    def test_content_with_blank_html(self):
+        data = {
+            'contents': '<html lang="en"><head><meta charset="UTF-8"><title>Title</title></head><body></body></html>',
+        }
+        headers = {
+            'Content-Type': 'application/json',
+        }
+        response = requests.post(url=self.url, data=json.dumps(data), headers=headers)
+        self.assertEqual(response.status_code, 200)
+
+    def test_html_with_unicode_char(self):
+        data = {
+            'contents': open('testcases/sample.html').read().encode('utf-8'),
+        }
+        headers = {
+            'Content-Type': 'application/json',
+        }
+        response = requests.post(url=self.url, data=json.dumps(data), headers=headers)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.headers['content-type'], 'application/pdf')
 
 if __name__ == '__main__':
     unittest.main()
