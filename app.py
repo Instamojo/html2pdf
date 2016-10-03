@@ -3,6 +3,7 @@ import tempfile
 import logging
 import time
 import os
+import urlparse
 
 from werkzeug.wsgi import wrap_file
 from werkzeug.wrappers import Request, Response
@@ -20,6 +21,12 @@ def application(request):
     The application will return a response with the PDF file.
     """
     start = time.time()
+    parsed = urlparse.urlparse(request.url)
+    if request.method == 'GET' and parsed.path == '/ping':
+        return Response(
+            status=200
+        )
+
     if request.method != 'POST':
         return Response(
             status=405
