@@ -78,5 +78,17 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.headers['content-type'], 'application/pdf')
 
+    def test_get_endpoint(self):
+        response = requests.get(
+            url='http://localhost:12345/ping',
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_endpoint_with_invalid_url(self):
+        response = requests.get(
+            url='http://localhost:12345/random',
+        )
+        self.assertEqual(response.status_code, 405)
+
 if __name__ == '__main__':
     unittest.main()
