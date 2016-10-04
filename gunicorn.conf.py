@@ -5,6 +5,7 @@ bind = '0.0.0.0:80'
 
 # Send error logs to stderr
 errorlog = '-'
+accesslog='-'
 
 workers = 3
 threads = 1
