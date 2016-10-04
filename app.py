@@ -48,6 +48,10 @@ def application(request):
                     status=400
                 )
             options = payload.get('options', {})
+            options.update({
+                'quiet': '',
+                'disable-javascript': ''
+            })
         elif request.files:
             # First check if any files were uploaded
             source_file.write(request.files['file'].read())
