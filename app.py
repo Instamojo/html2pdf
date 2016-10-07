@@ -48,10 +48,6 @@ def application(request):
                     status=400
                 )
             options = payload.get('options', {})
-            options.update({
-                'quiet': '',
-                'disable-javascript': ''
-            })
         elif request.files:
             # First check if any files were uploaded
             source_file.write(request.files['file'].read())
@@ -69,11 +65,14 @@ def application(request):
         args = ['wkhtmltopdf']
 
         # Add Global Options
-        if options:
-            for option, value in options.items():
-                args.append('--%s' % option)
-                if value:
-                    args.append('"%s"' % value)
+        options.update({
+                'quiet': '',
+                'disable-javascript': ''
+            })
+        for option, value in options.items():
+            args.append('--%s' % option)
+            if value:
+                args.append('"%s"' % value)
 
         # Add source file name and output file name
         file_name = source_file.name
