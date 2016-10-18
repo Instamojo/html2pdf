@@ -1,13 +1,12 @@
 import json
-import tempfile
 import logging
-import time
 import os
+import tempfile
 import urlparse
 
-from werkzeug.wsgi import wrap_file
-from werkzeug.wrappers import Request, Response
 from executor import execute
+from werkzeug.wrappers import Request, Response
+from werkzeug.wsgi import wrap_file
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +19,6 @@ def application(request):
     request data, with keys 'base64_html' and 'options'.
     The application will return a response with the PDF file.
     """
-    start = time.time()
     parsed = urlparse.urlparse(request.url)
     if request.method == 'GET' and parsed.path == '/ping':
         return Response(
@@ -80,8 +78,6 @@ def application(request):
 
         # Execute the command using executor
         execute(' '.join(args))
-        end = time.time()
-        print "time taken {elapse}".format(elapse=(end-start))
 
         result = file_name + '.pdf'
         response = Response(
