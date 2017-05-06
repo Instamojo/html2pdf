@@ -12,7 +12,4 @@ DOCKER_TAG=${CURRENT_BRANCH//\//_}"-"$LATEST_COMMIT
 # Tag it with DOCKER_TAG
 docker tag -f html2pdf:latest $DOCKER_REGISTRY/html2pdf:$DOCKER_TAG
 
-# docker login to our ecr for us-east-1 region
-`aws ecr get-login --region us-east-1`
-
 docker push $DOCKER_REGISTRY/html2pdf:$DOCKER_TAG

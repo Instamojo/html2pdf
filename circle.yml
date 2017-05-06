@@ -17,5 +17,5 @@ deployment:
   publish:
     branch: /.*/
     commands:
-      - chmod +x publish.sh
+      - aws ecr get-login --region us-east-1 | sh
       - ./publish.sh
