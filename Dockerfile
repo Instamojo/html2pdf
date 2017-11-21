@@ -1,8 +1,5 @@
 FROM ubuntu:14.04
 
-# ttf-mscorefonts-installer is available in multiverse repository only, which is not in default repositories.
-RUN echo "deb http://archive.ubuntu.com/ubuntu/ trusty multiverse" > /etc/apt/sources.list.d/contrib.list
-
 # Pre-requisites for wkhtmltpdf and our application
 RUN apt-get update -y && apt-get install -y \
     build-essential \
@@ -13,10 +10,10 @@ RUN apt-get update -y && apt-get install -y \
 
 # Download wkhtmltopdf binary
 RUN apt-get install -y wget && \
-    wget http://download.gna.org/wkhtmltopdf/0.12/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz && \
-    tar -xJf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz && \
+    wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
+    tar -xJf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
     cp wkhtmltox/bin/wkhtmltopdf /usr/local/bin/wkhtmltopdf && \
-    rm -rf wkhtmltox wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
+    rm -rf wkhtmltox wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
 
 # Install font packages to install commonly used fonts. Accept Eula for Microsoft Fonts automatically.
 RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections && \
