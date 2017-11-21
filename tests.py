@@ -69,7 +69,7 @@ class TestApp(unittest.TestCase):
 
     def test_html_with_unicode_char(self):
         data = {
-            'contents': open('testcases/sample.html').read().encode('utf-8'),
+            'contents': open('testcases/unicode.html').read().decode('utf-8'),
         }
         headers = {
             'Content-Type': 'application/json',
