@@ -1,8 +1,5 @@
 FROM ubuntu:14.04
 
-# ttf-mscorefonts-installer is available in multiverse repository only, which is not in default repositories.
-RUN echo "deb http://archive.ubuntu.com/ubuntu/ trusty multiverse" > /etc/apt/sources.list.d/contrib.list
-
 # Pre-requisites for wkhtmltpdf and our application
 RUN apt-get update -y && apt-get install -y \
     build-essential \
