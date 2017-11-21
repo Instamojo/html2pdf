@@ -1,4 +1,6 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Pre-requisites for wkhtmltpdf and our application
 RUN apt-get update -y && apt-get install -y \
