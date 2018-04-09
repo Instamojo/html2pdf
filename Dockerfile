@@ -32,7 +32,7 @@ ADD app.py gunicorn.conf.py ./
 
 EXPOSE 80
 
-RUN nobody
+USER nobody
 
 ENTRYPOINT ["usr/local/bin/gunicorn"]
 
