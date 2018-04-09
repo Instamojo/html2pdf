@@ -32,6 +32,8 @@ ADD app.py gunicorn.conf.py ./
 
 EXPOSE 80
 
+RUN nobody
+
 ENTRYPOINT ["usr/local/bin/gunicorn"]
 
 # Show the extended help
