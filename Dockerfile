@@ -30,7 +30,7 @@ ENV PYTHONUNBUFFERED=1 PYTHONHASHSEED=random
 
 ADD app.py gunicorn.conf.py ./
 
-EXPOSE 80
+EXPOSE 8080
 
 USER nobody
 

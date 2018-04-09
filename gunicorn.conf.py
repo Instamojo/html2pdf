@@ -1,7 +1,7 @@
 # Gunicorn Configuration File.
 # See: http://docs.gunicorn.org/en/latest/settings.html
 
-bind = '0.0.0.0:80'
+bind = '0.0.0.0:8080'
 
 # Send error logs to stderr
 errorlog = '-'
