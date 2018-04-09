@@ -6,7 +6,7 @@ dependencies:
   override:
     - pip install requests
     - docker build -t html2pdf:latest .
-    - docker run -d -it -p 12345:80 html2pdf
+    - docker run -it -p 12345:80 html2pdf
     - sleep 10
 
 test:
