@@ -29,12 +29,8 @@ def application(request):
         return Response(
             status=405
         )
-    request_is_json = False
-    if request.content_type == 'application/json':
-        request_is_json = True
-
+    request_is_json = request.content_type == 'application/json'
     with tempfile.NamedTemporaryFile(suffix='.html') as source_file:
-
         if request_is_json:
             # If a JSON payload is there, all data is in the payload
             payload = json.loads(request.data)
@@ -89,6 +85,4 @@ def application(request):
 
 if __name__ == '__main__':
     from werkzeug.serving import run_simple
-    run_simple(
-        '127.0.0.1', 8080, application
-    )
+    run_simple('127.0.0.1', 8080, application)
