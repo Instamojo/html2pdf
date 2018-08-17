@@ -1,0 +1,27 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+          reusable: true
+      - run:
+          name: Install Dependencies
+          command: pip install requests
+      - run:
+          name: Run Tests
+          command: python tests.py
+      - run:
+          name: Build Docker Image
+          command: |
+            docker build -t html2pdf:latest .
+            docker run -d -it -p 12345:8080 html2pdf
+            sleep 10
+      - deploy:
+          name: Publish
+          command: |
+            aws ecr get-login --region us-east-1 | sh
+            ./publish.sh
