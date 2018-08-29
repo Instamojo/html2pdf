@@ -12,14 +12,14 @@ jobs:
           name: Install Dependencies
           command: sudo pip install requests
       - run:
-          name: Run Tests
-          command: python tests.py
-      - run:
           name: Build Docker Image
           command: |
             docker build -t html2pdf:latest .
             docker run -d -it -p 12345:8080 html2pdf
             sleep 10
+      - run:
+          name: Run Tests
+          command: python tests.py
       - deploy:
           name: Publish
           command: |
