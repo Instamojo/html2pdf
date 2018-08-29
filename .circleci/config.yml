@@ -16,10 +16,8 @@ jobs:
           command: |
             docker build -t html2pdf:latest .
             docker run -d -it -p 12345:8080 html2pdf
+            python tests.py
             sleep 10
-      - run:
-          name: Run Tests
-          command: python tests.py
       - deploy:
           name: Publish
           command: |
