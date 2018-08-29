@@ -10,7 +10,7 @@ jobs:
           reusable: true
       - run:
           name: Install Dependencies
-          command: pip install requests
+          command: sudo pip install requests
       - run:
           name: Run Tests
           command: python tests.py
