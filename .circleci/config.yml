@@ -17,7 +17,7 @@ jobs:
             docker build -t html2pdf:latest .
             docker run -d -it -p 12345:8080 --name html2pdf html2pdf
             docker create -v /cfg --name configs alpine:3.4 /bin/true
-            docker cp /tests.py configs:/cfg
+            docker cp tests.py configs:/cfg
             docker run --volumes-from configs --network container:html2pdf python tests.py
             sleep 10
       # - run:
