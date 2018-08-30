@@ -28,7 +28,9 @@ RUN apt-get install -y python-pip && pip install werkzeug executor gunicorn requ
 # PYTHONHASHSEED: Enable hash randomization (equivalent to `python -R`)
 ENV PYTHONUNBUFFERED=1 PYTHONHASHSEED=random
 
-ADD app.py gunicorn.conf.py tests.py /testcases  ./
+ADD app.py gunicorn.conf.py tests.py  ./
+
+COPY testcases ./testcases
 
 EXPOSE 8080
 
