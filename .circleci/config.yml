@@ -23,5 +23,5 @@ jobs:
       - deploy:
           name: Publish
           command: |
-            aws ecr get-login --region us-east-1 | sh
+            aws ecr get-login --region us-east-1 --no-include-email | sh
             ./publish.sh
