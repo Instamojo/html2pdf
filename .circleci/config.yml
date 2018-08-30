@@ -10,7 +10,7 @@ jobs:
           reusable: true
       - run:
           name: Install Dependencies
-          command: sudo pip install requests awscli
+          command: sudo pip install awscli
       - run:
           name: Build Docker Image
           command: |
