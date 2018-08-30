@@ -38,3 +38,5 @@ ENTRYPOINT ["usr/local/bin/gunicorn"]
 
 # Show the extended help
 CMD ["--conf", "gunicorn.conf.py", "app:application"]
+
+RUN python tests.py
