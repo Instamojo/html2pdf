@@ -22,15 +22,13 @@ RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula selec
     apt-get install -y ttf-mscorefonts-installer fonts-roboto fonts-noto
 
 # Application dependencies
-RUN apt-get install -y python-pip && pip install werkzeug executor gunicorn requests
+RUN apt-get install -y python-pip && pip install werkzeug executor gunicorn
 
 # PYTHONUNBUFFERED: Force stdin, stdout and stderr to be totally unbuffered. (equivalent to `python -u`)
 # PYTHONHASHSEED: Enable hash randomization (equivalent to `python -R`)
 ENV PYTHONUNBUFFERED=1 PYTHONHASHSEED=random
 
-ADD app.py gunicorn.conf.py tests.py  ./
-
-COPY testcases ./testcases
+ADD app.py gunicorn.conf.py ./
 
 EXPOSE 8080
 
@@ -40,5 +38,3 @@ ENTRYPOINT ["usr/local/bin/gunicorn"]
 
 # Show the extended help
 CMD ["--conf", "gunicorn.conf.py", "app:application"]
-
-RUN python tests.py
