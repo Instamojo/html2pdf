@@ -15,7 +15,7 @@ jobs:
           name: Build Docker Image
           command: |
             docker build -t html2pdf:latest .
-            docker run -d -it --name html2pdf html2pdf
+            docker run -d -it -p 8080:8080 --name html2pdf html2pdf
             docker exec html2pdf python tests.py
             sleep 10
       - deploy:
