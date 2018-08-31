@@ -4,7 +4,7 @@ import unittest
 
 
 class TestApp(unittest.TestCase):
-    url = 'http://127.0.0.1:8080/'
+    url = 'http://localhost:8080/'
 
     def test_json_request(self):
         data = {
@@ -80,13 +80,13 @@ class TestApp(unittest.TestCase):
 
     def test_get_endpoint(self):
         response = requests.get(
-            url='http://127.0.0.1:8080/ping',
+            url='http://localhost:8080/ping',
         )
         self.assertEqual(response.status_code, 200)
 
     def test_get_endpoint_with_invalid_url(self):
         response = requests.get(
-            url='http://127.0.0.1:8080/random',
+            url='http://localhost:8080/random',
         )
         self.assertEqual(response.status_code, 405)
 
