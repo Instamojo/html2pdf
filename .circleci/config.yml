@@ -1,0 +1,26 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+          reusable: true
+      - run:
+          name: Install Dependencies
+          command: sudo pip install awscli
+      - run:
+          name: Build Docker Image
+          command: docker build -t html2pdf:latest .
+      - run:
+          name: Run Tests
+          command: |
+            docker run -d -it --name html2pdf html2pdf && sleep 10
+            docker exec html2pdf python tests.py
+      - deploy:
+          name: Publish
+          command: |
+            aws ecr get-login --region us-east-1 --no-include-email | sh
+            ./publish.sh
