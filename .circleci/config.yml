@@ -14,7 +14,6 @@ jobs:
       - run:
           name: Build Docker Image
           command: docker build -t html2pdf:latest .
-
       - run:
           name: Run Tests
           command: |
