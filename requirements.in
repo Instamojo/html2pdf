@@ -1,0 +1,4 @@
+executor==21.3
+gunicorn==19.9.0
+requests==2.22.0
+werkzeug==0.15.6
