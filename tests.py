@@ -7,9 +7,11 @@ class TestApp(unittest.TestCase):
     url = 'http://localhost:8080/'
 
     def test_json_request(self):
-        data = {
-            'contents': open('testcases/sample.html').read().encode('utf-8'),
-        }
+
+        data = {}
+        with open('testcases/sample.html') as html:
+            data["contents"] = html.read()
+
         headers = {
             'Content-Type': 'application/json',
         }
@@ -69,7 +71,7 @@ class TestApp(unittest.TestCase):
 
     def test_html_with_unicode_char(self):
         data = {
-            'contents': open('testcases/unicode.html').read().decode('utf-8'),
+            'contents': open('testcases/unicode.html').read()
         }
         headers = {
             'Content-Type': 'application/json',
