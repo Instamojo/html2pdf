@@ -9,7 +9,7 @@ class TestApp(unittest.TestCase):
     def test_json_request(self):
 
         data = {}
-        with open('testcases/sample.html') as html:
+        with open('testcases/sample.html', encoding="utf-8") as html:
             data["contents"] = html.read()
 
         headers = {
@@ -40,8 +40,12 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.headers['content-type'], 'application/pdf')
 
     def test_file_input(self):
-        files = {'file': open('testcases/sample.html', 'rb')}
-        response = requests.post(url=self.url, files=files)
+
+        file_contents = ""
+        with open('testcases/sample.html', 'rb') as f:
+            file_contents = f.read()
+
+        response = requests.post(url=self.url, files={'file': file_contents})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.headers['content-type'], 'application/pdf')
 
@@ -54,8 +58,11 @@ class TestApp(unittest.TestCase):
 
     def test_blank_file_input(self):
         # blank pdf will be the output
-        files = {'file': open('testcases/blank.html', 'rb')}
-        response = requests.post(url=self.url, files=files)
+        file_contents = ""
+        with open('testcases/blank.html', 'rb') as f:
+            file_contents = f.read()
+
+        response = requests.post(url=self.url, files={'file': file_contents})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.headers['content-type'], 'application/pdf')
 
@@ -70,12 +77,12 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_html_with_unicode_char(self):
-        data = {
-            'contents': open('testcases/unicode.html', encoding="utf-8").read()
-        }
-        headers = {
-            'Content-Type': 'application/json',
-        }
+        
+        data = {}
+        with open('testcases/unicode.html', encoding="utf-8") as f:
+            data["contents"] = f.read()
+        
+        headers = {'Content-Type': 'application/json'}
         response = requests.post(url=self.url, data=json.dumps(data), headers=headers)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.headers['content-type'], 'application/pdf')
