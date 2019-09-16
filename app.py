@@ -2,9 +2,9 @@ import json
 import logging
 import os
 import tempfile
-import urlparse
 
 from executor import execute
+from urllib.parse import urlparse
 from werkzeug.wrappers import Request, Response
 from werkzeug.wsgi import wrap_file
 
@@ -19,7 +19,7 @@ def application(request):
     request data, with keys 'base64_html' and 'options'.
     The application will return a response with the PDF file.
     """
-    parsed = urlparse.urlparse(request.url)
+    parsed = urlparse(request.url)
     if request.method == 'GET' and parsed.path == '/ping':
         return Response(
             status=200
@@ -29,12 +29,14 @@ def application(request):
         return Response(
             status=405
         )
+
     request_is_json = request.content_type == 'application/json'
     with tempfile.NamedTemporaryFile(suffix='.html') as source_file:
         if request_is_json:
             # If a JSON payload is there, all data is in the payload
             payload = json.loads(request.data)
             try:
+
                 source_file.write(payload['contents'].encode('utf-8'))
             except KeyError:
                 logger.warn('The request content is not specified')
@@ -77,7 +79,7 @@ def application(request):
 
         result = file_name + '.pdf'
         response = Response(
-            wrap_file(request.environ, open(result)),
+            wrap_file(request.environ, open(result, 'rb')),
             mimetype='application/pdf',
         )
         os.remove(result)

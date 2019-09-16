@@ -18,7 +18,7 @@ jobs:
           name: Run Tests
           command: |
             docker run -d -it --name html2pdf html2pdf && sleep 10
-            docker exec html2pdf python tests.py
+            docker exec html2pdf python3 tests.py
       - deploy:
           name: Publish
           command: |
