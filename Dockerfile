@@ -9,14 +9,15 @@ RUN apt-get update -y && apt-get install -y \
     xorg \
     libssl-dev \
     libxrender-dev \
+    libjpeg-turbo8-dev \
     fontconfig \
+    xfonts-75dpi \
     wget
 
 # Download wkhtmltopdf binary
-RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
-    tar -xJf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
-    cp wkhtmltox/bin/wkhtmltopdf /usr/local/bin/wkhtmltopdf && \
-    rm -rf wkhtmltox wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.xenial_amd64.deb && \
+    dpkg -i wkhtmltox_0.12.5-1.xenial_amd64.deb && \
+    apt -f install
 
 # Install font packages to install commonly used fonts. Accept Eula for Microsoft Fonts automatically.
 RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections && \
