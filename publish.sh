@@ -2,8 +2,6 @@
 
 set -e
 
-DOCKER_REGISTRY=686140181923.dkr.ecr.us-east-1.amazonaws.com
-
 LATEST_COMMIT=`git rev-parse --short HEAD`
 CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
 
