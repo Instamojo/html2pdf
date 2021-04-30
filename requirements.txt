@@ -4,18 +4,38 @@
 #
 #    pip-compile --output-file=requirements.txt
 #
-certifi==2019.9.11        # via requests
-chardet==3.0.4            # via requests
-coloredlogs==10.0         # via executor
+certifi==2019.9.11
+    # via requests
+chardet==3.0.4
+    # via requests
+coloredlogs==10.0
+    # via executor
 executor==21.3
-fasteners==0.15           # via executor
+    # via -r requirements.in
+fasteners==0.15
+    # via executor
 gunicorn==19.9.0
-humanfriendly==4.18       # via coloredlogs, executor, property-manager
-idna==2.8                 # via requests
-monotonic==1.5            # via fasteners
-property-manager==2.3.1   # via executor
+    # via -r requirements.in
+humanfriendly==4.18
+    # via
+    #   coloredlogs
+    #   executor
+    #   property-manager
+idna==2.8
+    # via requests
+monotonic==1.5
+    # via fasteners
+property-manager==2.3.1
+    # via executor
 requests==2.22.0
-six==1.12.0               # via executor, fasteners
-urllib3==1.25.3           # via requests
-verboselogs==1.7          # via property-manager
+    # via -r requirements.in
+six==1.12.0
+    # via
+    #   executor
+    #   fasteners
+urllib3==1.25.8
+    # via requests
+verboselogs==1.7
+    # via property-manager
 werkzeug==0.15.6
+    # via -r requirements.in
