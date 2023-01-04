@@ -14,3 +14,4 @@ This application is:
 * **Synchronous** - Response includes PDF document, which is generated in a blocking manner (without any queuing)
 * **Stateless** - No data stored anywhere
 * **Scalable** - No single point of failure and no centralised components (since its stateless) making it highly scalable.
+test
